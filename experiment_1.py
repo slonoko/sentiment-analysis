@@ -19,7 +19,7 @@ run_config.environment.python.conda_dependencies=CondaDependencies.create(pip_pa
 environment = Environment.get(ws, "sentiment-env")
 
 estimator = TensorFlow(
-    source_directory="experiment_1", 
+    source_directory="experiment", 
     entry_script="experiment.py", 
     framework_version="2.1",
     conda_packages=["python=3.7.4","tensorflow","tensorflow-datasets"],
