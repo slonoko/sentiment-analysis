@@ -21,3 +21,11 @@ experiment = Experiment(workspace=ws, name="sentiment-analysis")
 run = experiment.submit(config=estimator)
 
 run.wait_for_completion(show_output=True)
+
+run.register_model( model_name='sentiment_model',
+                    model_path=f'outputs/sentiment_model.h5',
+                    description='A sentiment analysis model from imdb data',
+                    tags={'source': 'imdb'},
+                    model_framework=Model.Framework.TENSORFLOW,
+                    model_framework_version='2.2.0',
+                    properties={'Accuracy': run.get_metrics()['accuracy']})

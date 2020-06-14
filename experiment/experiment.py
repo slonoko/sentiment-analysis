@@ -88,11 +88,3 @@ scores = model.evaluate(X_test, y_test, batch_size=BATCH_SIZE)
 run.log("accuracy", (scores[1] * 100))
 
 run.complete()
-
-run.register_model( model_name='sentiment_model',
-                    model_path='outputs/sentiment_model.h5',
-                    description='A sentiment analysis model from imdb data',
-                    tags={'source': 'imdb'},
-                    model_framework=Model.Framework.TENSORFLOW,
-                    model_framework_version='2.2.0',
-                    properties={'Accuracy': run.get_metrics()['accuracy']})
