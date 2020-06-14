@@ -2,5 +2,4 @@ name: sentiment-deploy
 dependencies:
   - python=3.7.4
   - tensorflow
-  - pip:
-    - azureml-sdk[notebooks,automl,explain]
+  - numpy

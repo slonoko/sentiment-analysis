@@ -4,7 +4,7 @@ from azureml.core.conda_dependencies import CondaDependencies
 
 ws = Workspace.from_config()
 
-# environment = Environment.from_conda_specification(name="sentiment-env", file_path="conda.yml")
+# environment = Environment.from_conda_specification(name="sentiment-env", file_path="experiment-env.yml")
 # environment.register(ws)
 environment = Environment.get(ws, "sentiment-env")
 

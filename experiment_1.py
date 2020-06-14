@@ -14,7 +14,7 @@ run_config.environment.docker.base_image = DEFAULT_CPU_IMAGE
 run_config.environment.python.user_managed_dependencies = False
 run_config.environment.python.conda_dependencies=CondaDependencies.create(pip_packages=['azureml-sdk[notebooks,automl,explain]'])
 
-# environment = Environment.from_conda_specification(name="sentiment-env", file_path="conda.yml")
+# environment = Environment.from_conda_specification(name="sentiment-env", file_path="experiment-env.yml")
 # environment.register(ws)
 environment = Environment.get(ws, "sentiment-env")
 
