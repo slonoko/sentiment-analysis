@@ -3,3 +3,5 @@ dependencies:
   - python=3.7.4
   - tensorflow
   - numpy
+  - pip:
+    - azureml-sdk[notebooks,automl,explain]

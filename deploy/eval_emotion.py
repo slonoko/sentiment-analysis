@@ -1,25 +1,15 @@
 import json
 import numpy as np
 from azureml.core.model import Model
+from azureml.core import Run
 import tensorflow as tf
 from tensorflow.keras import models, layers, preprocessing
-import argparse
 
-parser = argparse.ArgumentParser()
-
-parser.add_argument('--max-len', type=int, dest='max_len', default=500)
-parser.add_argument('--n-words', type=int, dest='n_words', default=5000)
-parser.add_argument('--dim-embedding', type=int, dest='dim_embedding', default=32)
-parser.add_argument('--epochs', type=int, dest='epochs', default=5)
-parser.add_argument('--batch-size', type=int, dest='batch_size', default=128)
-
-args = parser.parse_args()
-
-max_len = args.max_len
-n_words = args.n_words
-dim_embedding = args.dim_embedding
-EPOCHS = args.epochs
-BATCH_SIZE = args.batch_size
+max_len = 500
+n_words = 5000
+dim_embedding = 32
+EPOCHS = 2
+BATCH_SIZE = 128
 model = None
 
 def init():
@@ -49,4 +39,4 @@ def prepare_embedding(review):
 def run(raw_data):
     data = prepare_embedding(json.loads(raw_data)['data'])
     predictions = model.predict(data)
-    return predictions
+    return predictions.tolist()
