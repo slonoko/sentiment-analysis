@@ -117,3 +117,4 @@ dmypy.json
 /log_*
 .data/
 config.json
+.config
