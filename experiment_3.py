@@ -10,16 +10,17 @@ ws = Workspace.from_config()
 environment = Environment.get(ws, "sentiment-env")
 
 estimator = TensorFlow(
-    source_directory="experiment",
+    source_directory="imdb",
     entry_script="experiment.py",
-    compute_target="trainer",
+    compute_target="archi-trainer",
     framework_version="2.1",
     environment_definition=environment
 )
 
 param_space = {
-    '--epochs': choice(2, 3, 5),
-    '--n-words': choice(5000, 20000, 50000)
+    '--epochs': choice(2, 3, 5,10),
+    '--n-words': choice(5000, 20000, 50000, 80000),
+    '--dim-embedding':choice(32, 64)
 }
 
 param_sampling = GridParameterSampling(param_space)
@@ -31,7 +32,7 @@ hyperdrive = HyperDriveConfig(
     primary_metric_name='accuracy', 
     hyperparameter_sampling=param_sampling,
     policy=early_termination_policy, 
-    max_total_runs=9, 
+    max_total_runs=12, 
     max_concurrent_runs=4,
     primary_metric_goal=PrimaryMetricGoal.MAXIMIZE)
 

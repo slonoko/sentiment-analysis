@@ -9,9 +9,9 @@ environment.register(ws)
 # environment = Environment.get(ws, "sentiment-env")
 
 estimator = TensorFlow(
-    source_directory="experiment", 
+    source_directory="imdb", 
     entry_script="experiment.py", 
-    compute_target="local", 
+    compute_target="archi-trainer", 
     framework_version="2.1",  
     script_params={'--n-words': 5000, '--epochs': 2},
     environment_definition=environment

@@ -70,9 +70,6 @@ def build_model():
 model = build_model()
 model.summary()
 
-model.compile(optimizer=tf.optimizers.Adam(),
-              loss=tf.losses.BinaryCrossentropy(), metrics=["accuracy"])
-
 model.fit(
     X_train,
     y_train,
