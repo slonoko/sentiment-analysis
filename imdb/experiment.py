@@ -56,9 +56,7 @@ def build_model():
     model = models.Sequential()
 
     model.add(layers.Embedding(n_words, dim_embedding, input_length=max_len))
-    model.add(layers.Flatten())
-    model.add(layers.Dense(16, activation='relu'))
-    model.add(layers.Dense(16, activation='relu'))
+    model.add(layers.GRU(units=32,dropout=0.2, recurrent_dropout=0.2))
     model.add(layers.Dense(1, activation='sigmoid'))
 
     model.compile(loss='binary_crossentropy',
