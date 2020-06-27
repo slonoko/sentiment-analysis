@@ -13,7 +13,7 @@ estimator = TensorFlow(
     entry_script="experiment.py", 
     compute_target="archi-trainer", 
     framework_version="2.1",  
-    script_params={'--n-words': 5000, '--epochs': 2},
+    script_params={'--n-words': 5000, '--epochs': 5},
     environment_definition=environment
     )
 

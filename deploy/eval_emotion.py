@@ -22,10 +22,9 @@ def build_model():
     m = models.Sequential()
 
     m.add(layers.Embedding(n_words, dim_embedding, input_length=max_len))
-    m.add(layers.Flatten())
-    m.add(layers.Dense(16, activation='relu'))
-    m.add(layers.Dense(16, activation='relu'))
-    m.add(layers.Dense(1, activation='sigmoid'))
+    model.add(layers.Embedding(n_words, dim_embedding, input_length=max_len))
+    model.add(layers.GRU(units=32,dropout=0.2, recurrent_dropout=0.2))
+    model.add(layers.Dense(1, activation='sigmoid'))
 
     m.compile(loss='binary_crossentropy',
                   optimizer='adam', metrics=['accuracy'])
