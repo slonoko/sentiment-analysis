@@ -14,7 +14,7 @@ model = None
 
 def init():
     global model
-    model_path = Model.get_model_path("sentiment_model")
+    model_path = Model.get_model_path("sentiment_model", version=2)
     model = build_model()
     model.load_weights(model_path)
     
@@ -22,9 +22,8 @@ def build_model():
     m = models.Sequential()
 
     m.add(layers.Embedding(n_words, dim_embedding, input_length=max_len))
-    model.add(layers.Embedding(n_words, dim_embedding, input_length=max_len))
-    model.add(layers.GRU(units=32,dropout=0.2, recurrent_dropout=0.2))
-    model.add(layers.Dense(1, activation='sigmoid'))
+    m.add(layers.GRU(units=32,dropout=0.2, recurrent_dropout=0.2))
+    m.add(layers.Dense(1, activation='sigmoid'))
 
     m.compile(loss='binary_crossentropy',
                   optimizer='adam', metrics=['accuracy'])
