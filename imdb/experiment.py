@@ -11,7 +11,7 @@ parser = argparse.ArgumentParser()
 
 parser.add_argument('--max-len', type=int, dest='max_len', default=500)
 parser.add_argument('--n-words', type=int, dest='n_words', default=5000)
-parser.add_argument('--dim-embedding', type=int, dest='dim_embedding', default=32)
+parser.add_argument('--dim-embedding', type=int, dest='dim_embedding', default=64)
 parser.add_argument('--epochs', type=int, dest='epochs', default=5)
 parser.add_argument('--batch-size', type=int, dest='batch_size', default=128)
 
@@ -56,7 +56,8 @@ def build_model():
     model = models.Sequential()
 
     model.add(layers.Embedding(n_words, dim_embedding, input_length=max_len))
-    model.add(layers.GRU(units=32,dropout=0.2, recurrent_dropout=0.2))
+    model.add(layers.Bidirectional(layers.LSTM(dim_embedding)))
+    model.add(layers.Dense(dim_embedding, activation='relu'))
     model.add(layers.Dense(1, activation='sigmoid'))
 
     model.compile(loss='binary_crossentropy',

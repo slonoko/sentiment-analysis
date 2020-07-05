@@ -11,9 +11,9 @@ environment.register(ws)
 estimator = TensorFlow(
     source_directory="imdb", 
     entry_script="experiment.py", 
-    compute_target="archi-trainer", 
+    compute_target="local", 
     framework_version="2.1",  
-    script_params={'--n-words': 5000, '--epochs': 5},
+    script_params={'--n-words': 80000, '--epochs': 2},
     environment_definition=environment
     )
 
