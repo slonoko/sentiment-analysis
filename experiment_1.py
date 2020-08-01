@@ -24,10 +24,10 @@ estimator = TensorFlow(
     framework_version="2.1",
     conda_packages=["python=3.7.4","tensorflow","tensorflow-datasets"],
     pip_packages=["azureml-sdk[notebooks,automl,explain]"],
-    compute_target="local"
+    compute_target="archi-trainer"
     )
 
-model_step = EstimatorStep(name="training model", estimator=estimator, compute_target="dummy", estimator_entry_script_arguments=['--n-words', 5000, '--epochs', 2])
+model_step = EstimatorStep(name="training model", estimator=estimator, compute_target="archi-trainer", estimator_entry_script_arguments=['--n-words', 5000, '--epochs', 2])
 # register_step = PythonScriptStep(name="register pipeline", source_directory="sentiment_analysis", script_name="registration.py", compute_target="dummy", runconfig=run_config)
 # register_step.run_after(model_step)
 
