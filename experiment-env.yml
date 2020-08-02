@@ -4,5 +4,6 @@ dependencies:
   - tensorflow-gpu
   - tensorflow-datasets
   - pandas
+  - nltk
   - pip:
     - azureml-sdk[notebooks,explain]
