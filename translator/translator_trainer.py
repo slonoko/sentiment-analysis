@@ -127,6 +127,32 @@ def predict(encoder, decoder, batch_size,
     
     print("predicted", " ".join(pred_sent_fr))
 
+def translate(encoder, decoder, batch_size, 
+        sents_en, data_en, 
+        word2idx_fr, idx2word_fr):
+    random_id = np.random.choice(len(sents_en))
+    print("input",  " ".join(sents_en[random_id]))
+
+    encoder_in = tf.expand_dims(data_en[random_id], axis=0)
+
+    encoder_state = encoder.init_state(1)
+    encoder_out, encoder_state = encoder(encoder_in, encoder_state)
+    decoder_state = encoder_state
+
+    decoder_in = tf.expand_dims(
+        tf.constant([word2idx_fr["BOS"]]), axis=0)
+    pred_sent_fr = []
+    while True:
+        decoder_pred, decoder_state = decoder(decoder_in, decoder_state)
+        decoder_pred = tf.argmax(decoder_pred, axis=-1)
+        pred_word = idx2word_fr[decoder_pred.numpy()[0][0]]
+        pred_sent_fr.append(pred_word)
+        if pred_word == "EOS":
+            break
+        decoder_in = decoder_pred
+    
+    print("predicted", " ".join(pred_sent_fr))
+
 
 def evaluate_bleu_score(encoder, decoder, batch_size, test_dataset, 
         word2idx_fr, idx2word_fr):

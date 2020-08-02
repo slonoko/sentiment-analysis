@@ -92,7 +92,7 @@ decoder = tt.Decoder(vocab_size_fr+1, embedding_dim, maxlen_fr, decoder_dim)
 
 optimizer = tf.keras.optimizers.Adam()
 
-checkpoint_prefix = os.path.join(model_dir, "ckpt")
+checkpoint_prefix = os.path.join(model_dir, "ckpt-trans-fr-en")
 checkpoint = tf.train.Checkpoint(optimizer=optimizer,
                                  encoder=encoder,
                                  decoder=decoder)
@@ -108,10 +108,10 @@ for e in range(num_epochs):
         # print(encoder_in.shape, decoder_in.shape, decoder_out.shape)
         loss = tt.train_step(encoder, decoder, optimizer, encoder_in, decoder_in, decoder_out, encoder_state)
 
-    tt.predict(encoder, decoder, batch_size, sents_en, data_en,
-        sents_fr_out, word2idx_fr, idx2word_fr)
+    #tt.predict(encoder, decoder, batch_size, sents_en, data_en, sents_fr_out, word2idx_fr, idx2word_fr)
 
     eval_score = tt.evaluate_bleu_score(encoder, decoder, batch_size, test_dataset, word2idx_fr, idx2word_fr)
+    print(f'Epoch {num_epochs}: with a BLEU score of {eval_score}')
     # eval_scores.append(eval_score)
 
 checkpoint.save(file_prefix=checkpoint_prefix)
